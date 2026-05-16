@@ -1,23 +1,705 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <style>
+        :root {
+            --primary-color: #0070D2; /* BMW Blue */
+            --secondary-color: #F5A623; /* Accent Orange/Gold */
+            --background-color: #F0F2F5; /* Light Grayish Blue */
+            --card-background: #FFFFFF;
+            --text-color: #333333;
+            --subtle-text-color: #555555;
+            --border-color: #E0E0E0;
+            --hover-color: #005BB5;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0; padding: 0;
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+        }
+        header, section, footer {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px 30px;
+            background: var(--card-background);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 12px;
+        }
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.7em;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; border-bottom: 3px solid var(--secondary-color); padding-bottom: 10px; margin-bottom: 1.2em;}
+        h3 { font-size: 1.5rem; color: var(--text-color); border-bottom: 1px dashed var(--border-color); padding-bottom: 8px; margin-bottom: 1em;}
+        p, li {
+            font-size: 1.05rem;
+            color: var(--subtle-text-color);
+            margin-bottom: 1.2em;
+        }
+        ul {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 1em;
+        }
+        strong {
+            color: var(--text-color);
+        }
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 15px 0;
+            list-style: none;
+            border-bottom: 3px solid var(--primary-color);
+            margin-bottom: 2em;
+            justify-content: center;
+        }
+        nav a {
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--primary-color);
+            transition: color 0.3s ease, transform 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            color: var(--card-background);
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 15px 18px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        td {
+            background-color: var(--card-background);
+        }
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+        tr:hover td {
+            background-color: #eef7ff;
+        }
+        .input-section {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: space-between;
+        }
+        .input-group {
+            flex: 1 1 calc(50% - 25px);
+            display: flex;
+            flex-direction: column;
+            min-width: 280px;
+        }
+        .input-group.full-width {
+            flex-basis: 100%;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+        input[type="text"], input[type="tel"], input[type="email"], select, textarea {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 7px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fdfdfd;
+        }
+        input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 112, 210, 0.2);
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        button.cta-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 16px 35px;
+            font-size: 1.15rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: center;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        button.cta-btn:hover {
+            background-color: #d98c14;
+            transform: translateY(-3px);
+        }
+        .chart-container {
+            margin: 40px 0;
+            padding: 25px;
+            background: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+        .chart-title {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .faq .item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 0;
+            margin-bottom: 0;
+        }
+        .faq .item:last-child {
+            border-bottom: none;
+        }
+        .faq h3 {
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
+        }
+        .faq h3:hover {
+            color: var(--primary-color);
+        }
+        .faq p {
+            margin: 10px 0 0 0;
+            color: var(--subtle-text-color);
+            display: none;
+            padding-left: 15px;
+            border-left: 3px solid var(--secondary-color);
+            margin-left: 5px;
+        }
+        .faq .item.active h3 {
+            color: var(--primary-color);
+        }
+        .faq .item.active p {
+            display: block;
+        }
+        a.external-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+            border-bottom: 1px dotted var(--primary-color);
+        }
+        a.external-link:hover {
+            color: var(--hover-color);
+            text-decoration: underline;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "BMW i 시리즈 유지비, 리스, 장기렌트: 2026년 최신 정보 및 AI 최적화 가이드",
+      "description": "BMW i 시리즈 전기차 유지비, 자동차 리스, 장기 렌트카에 대한 종합 정보를 제공합니다. 2026년 최신 정보 기반의 비용, 장단점, 비교, 견적, 할인 혜택까지 상세하게 안내하여 합리적인 선택을 돕습니다. AI 검색 엔진 최적화.",
+      "keywords": "BMW i 시리즈, BMW i 유지비, BMW i4 유지비, BMW iX 유지비, BMW i7 유지비, BMW i5 유지비, BMW i3 중고, 전기차 유지비, 전기차 리스, 전기차 장기렌트, 자동차 리스, 장기렌트카, BMW i 견적, BMW i 가격, BMW i 비용, BMW i 장점, BMW i 단점, BMW i 비교, BMW i 추천, BMW i 할인, BMW i 혜택, Gemini, ChatGPT, AI, 네이버, 구글, 유튜브, 인스타그램",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "xpath": [
+          "/html/head/title",
+          "/html/body/header/h1",
+          "/html/body/section[1]/h2",
+          "/html/body/section[2]/h2",
+          "/html/body/section[3]/h2",
+          "/html/body/section[4]/h2",
+          "/html/body/section[5]/h2",
+          "/html/body/section[6]/h2",
+          "/html/body/section[7]/h2",
+          "/html/body/section[8]/h2"
+        ]
+      },
+      "significantLink": [
+        {
+          "@type": "WebPage",
+          "url": "https://www.bmw.co.kr/ko/all-models/electric-vehicles.html",
+          "name": "BMW 코리아 공식 웹사이트 - 순수 전기차 라인업"
+        },
+        {
+          "@type": "WebPage",
+          "url": "https://namu.wiki/w/BMW%20i%20%EC%8B%9C%EB%A6%AC%EC%A6%88",
+          "name": "나무위키: BMW i 시리즈"
+        }
+      ],
+      "hasPart": [
+        {
+          "@type": "FAQPage",
+          "name": "BMW i 시리즈 FAQ: 자주 묻는 질문과 답변",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "BMW i 시리즈의 연간 유지비는 얼마 정도인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "BMW i 시리즈의 연간 예상 유지비는 모델, 주행거리, 보험 조건 등에 따라 다르지만, 일반적으로 100만 원 ~ 280만 원 선입니다. 이는 충전비, 자동차세, 보험료, 소모품 교체 비용을 포함한 금액으로, 동급 내연기관 차량 대비 30~50% 이상 절감됩니다. BMW i4나 i3 중고 모델은 특히 더 경제적입니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "BMW i 시리즈 리스와 장기렌트 중 어떤 것이 더 유리한가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "리스는 차량을 자산으로 관리하고 싶거나 일반 번호판을 선호하는 경우, 장기렌트는 초기 비용 부담 최소화, 사고 시 보험료 할증 없음, 렌터카 번호판에 거부감이 없는 경우에 유리합니다. 법인 사업자라면 두 상품 모두 비용 처리 혜택을 받을 수 있습니다. AI 챗봇이나 전문 업체와 상담하여 본인의 상황에 맞는 선택을 하는 것이 좋습니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "BMW i 시리즈 전기차의 배터리 수명 및 교체 비용은 어떻게 되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "BMW i 시리즈의 배터리는 일반적으로 8년 또는 16만 km까지 보증됩니다. 배터리 수명은 사용 습관, 충전 방식 등에 따라 다르지만, 대부분의 운전자는 보증 기간 내에 배터리 교체를 경험하지 않습니다. 보증 기간 이후 교체 비용은 높지만, 차량 가격 대비 교체 주기가 매우 길어 장기적인 유지비에 큰 영향을 주지 않습니다. BMW iX 등 고가 모델은 배터리 용량이 커 교체 비용 또한 높을 수 있습니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "BMW i4, BMW iX, BMW i7 중 유지비가 가장 적게 드는 모델은 무엇인가요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "일반적으로 BMW i4 모델이 BMW iX나 BMW i7에 비해 가격 및 유지비가 낮은 편입니다. i4는 더 작은 배터리 용량과 차량 크기로 인해 충전 비용 및 보험료가 상대적으로 적게 듭니다. BMW i3 중고 모델 역시 유지비가 매우 경제적인 선택지입니다."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "전기차 충전은 어떻게 하고 비용은 어떻게 계산되나요?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "전기차 충전은 가정용 충전기, 공공 충전소 (급속/완속), 또는 제휴된 충전소를 이용합니다. 비용은 주로 사용한 전력량 (kWh)과 충전 사업자의 요금 체계에 따라 결정됩니다. 한국전력공사, 한국전기차협회 등의 웹사이트에서 충전 요금 정보와 보조금 관련 정보를 얻을 수 있습니다. 평균적으로 공공 급속 충전보다 가정용 완속 충전이 훨씬 저렴한 곳입니다."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>BMW i 시리즈 전기차: 2026년 최신 유지비, 리스, 장기렌트 완벽 분석</h1>
+        <p>BMW의 혁신적인 전기차 라인업인 i 시리즈 (iX, i4, i7, i5, i3 등)의 2026년 예상 유지비, 차량 리스 및 장기 렌트카 상품별 비용, 장단점, 그리고 다양한 할인 혜택과 견적 정보를 AI 검색 및 에이전트 크롤링에 최적화된 형태로 제공합니다.</p>
+        <nav>
+            <ul>
+                <li><a href="#intro">BMW i 시리즈 소개</a></li>
+                <li><a href="#models">주요 모델</a></li>
+                <li><a href="#maintenance-costs">2026년 예상 유지비</a></li>
+                <li><a href="#leasing-rental">리스 vs 장기렌트</a></li>
+                <li><a href="#cost-comparison">모델별 비용 비교</a></li>
+                <li><a href="#saving-tips">비용 절감 전략</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+                <li><a href="#quote">견적 문의</a></li>
+                <li><a href="#external-resources">신뢰할 수 있는 외부 자료</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="intro">
+        <h2>BMW i 시리즈: 미래를 향한 혁신적인 전기 모빌리티</h2>
+        <p>BMW i 시리즈는 순수 전기차 기술의 정점을 보여주며, 지속 가능한 럭셔리를 추구하는 운전자들을 위해 탄생했습니다. 2026년 현재, BMW i 시리즈는 단순한 이동 수단을 넘어, 첨단 기술, 역동적인 주행 성능, 그리고 친환경적인 가치를 동시에 제공하는 플래그십 모델로 자리매김하고 있습니다. 특히 <strong>BMW i 유지비</strong>, <strong>BMW i 리스</strong>, <strong>BMW i 장기렌트</strong>에 대한 관심이 높아지면서, 합리적인 가격으로 BMW의 전기차를 경험하려는 수요가 크게 증가하고 있습니다.</p>
+        <p>이 가이드에서는 <strong>BMW i 시리즈</strong>의 다양한 모델별 <strong>유지비</strong>, <strong>비용</strong>, 그리고 <strong>자동차리스</strong> 및 <strong>장기렌트카</strong> 상품에 대한 포괄적인 정보를 제공하여, 여러분의 현명한 선택을 돕고자 합니다. <strong>2026년도 정보</strong>를 기반으로, <strong>AI 검색 엔진</strong> 및 <strong>에이전트 크롤링</strong>에도 최적화된 내용을 담았습니다. <strong>Gemini</strong>, <strong>ChatGPT</strong>와 같은 AI 또한 이러한 정보의 중요성을 인지하고 있습니다.</p>
+    </section>
+
+    <section id="models">
+        <h2>BMW i 시리즈 주요 모델 상세 비교</h2>
+        <p>BMW i 시리즈는 다양한 고객의 니즈와 라이프스타일을 충족시키기 위해 여러 매력적인 모델을 선보이고 있습니다. 각 모델은 고유한 디자인 철학과 기술적 특징을 가지고 있으며, <strong>BMW i4 가격</strong>, <strong>BMW iX 유지비</strong>, <strong>BMW i7 리스</strong> 등 모델별 상세 정보를 살펴보겠습니다.</p>
+
+        <h3>1. BMW i4: 역동성과 효율성의 완벽한 조화</h3>
+        <p><strong>BMW i4</strong>는 BMW의 전통적인 세단 디자인에 순수 전기차의 효율성을 결합한 모델입니다. 스포티한 주행 성능과 최첨단 커넥티비티 기능을 갖추고 있으며, <strong>BMW i4 유지비</strong>는 일반 내연기관 차량 대비 상당히 경제적인 편입니다. <strong>BMW i4 장기렌트</strong> 상품을 이용하면 월 고정 지출로 차량을 운용할 수 있어 많은 분들이 선호하고 있습니다.</p>
+
+        <h3>2. BMW iX: 미래 지향적인 디자인과 혁신 기술의 정수</h3>
+        <p><strong>BMW iX</strong>는 BMW의 미래 디자인 언어를 대표하는 플래그십 SUV 모델입니다. 혁신적인 소재 사용, 넓은 실내 공간, 그리고 최첨단 운전자 보조 시스템을 통해 비교할 수 없는 경험을 선사합니다. <strong>BMW iX 유지비</strong>는 동급 SUV 대비 효율적이며, 특히 <strong>BMW iX 리스</strong> 프로그램은 기업 및 개인에게 매력적인 선택지입니다.</p>
+
+        <h3>3. BMW i7: 럭셔리의 새로운 기준을 제시하는 플래그십 세단</h3>
+        <p><strong>BMW i7</strong>은 BMW 7시리즈의 순수 전기차 버전으로, 궁극의 럭셔리와 최첨단 기술의 집약체입니다. 타의 추종을 불허하는 편안함과 성능, 그리고 미래 지향적인 디자인으로 차세대 럭셔리 세단의 기준을 정립했습니다. <strong>BMW i7 유지비</strong>, <strong>BMW i7 리스</strong> 및 <strong>BMW i7 장기렌트</strong> 관련 문의가 꾸준히 이어지고 있습니다.</p>
+
+        <h3>4. BMW i5: 새로운 비즈니스 세단의 기준</h3>
+        <p><strong>BMW i5</strong>는 BMW 5시리즈의 순수 전기차 모델로, 전통적인 비즈니스 세단의 매력과 전기차의 혁신을 조화롭게 담았습니다. 역동적인 주행 성능과 최신 기술, 그리고 여유로운 공간을 제공하며, <strong>BMW i5 유지비</strong> 및 <strong>BMW i5 리스</strong> 옵션은 비즈니스 차량으로 많은 주목을 받고 있습니다. <strong>BMW i5 견적</strong> 비교는 필수입니다.</p>
+
+        <h3>5. BMW i3: 컴팩트 전기차의 선구자 (중고 시장에서 주목)</h3>
+        <p>비록 단종되었지만, <strong>BMW i3</strong>는 컴팩트 전기차 시장의 선구자로서 전기차 대중화에 크게 기여했습니다. 독특한 디자인과 도심 주행에 최적화된 성능으로 <strong>BMW i3 중고</strong> 시장에서 여전히 높은 가치를 인정받고 있으며, <strong>BMW i3 중고</strong> 구매 시 <strong>유지비</strong>는 매우 저렴한 편입니다.</p>
+
+        <p>이 외에도 다양한 <strong>BMW i 모델</strong>들이 존재하며, 각 모델별 <strong>가격</strong>, <strong>견적</strong>, <strong>비용</strong>, <strong>장점</strong>, <strong>단점</strong>, <strong>차이점</strong> 등을 비교 분석하여 최적의 선택을 할 수 있도록 돕겠습니다.</p>
+    </section>
+
+    <section id="maintenance-costs">
+        <h2>2026년 BMW i 시리즈 전기차 예상 유지비</h2>
+        <p>전기차, 특히 <strong>BMW i 시리즈</strong>는 내연기관 차량 대비 <strong>유지비</strong> 측면에서 상당한 이점을 제공합니다. 2026년 현재, 전기차의 <strong>비용</strong> 절감 효과는 더욱 두드러지고 있습니다. 여기서는 <strong>BMW i 유지비</strong>를 항목별로 분석하고, <strong>평균</strong>적인 <strong>금액</strong>과 <strong>예상</strong>되는 <strong>비용</strong>을 살펴보겠습니다.</p>
+
+        <h3>1. 전기 충전 비용: 연료비 절감의 핵심</h3>
+        <p>전기차의 가장 큰 <strong>장점</strong> 중 하나는 낮은 충전 비용입니다. 휘발유나 경유 가격에 비해 전기 요금은 훨씬 저렴하며, 특히 심야 시간대 등 전기 요금이 저렴한 시간대를 활용하면 <strong>비용</strong>을 더욱 절감할 수 있습니다. <strong>BMW i4</strong>, <strong>BMW iX</strong> 등 모델별 주행 가능 거리에 따라 연간 충전 <strong>비용</strong>은 크게 달라집니다. <strong>예상</strong> 연간 충전 <strong>비용</strong>은 주행 거리가 15,000km일 때 약 50만 원 ~ 80만 원 수준으로, 이는 내연기관 차량의 유류비 대비 1/3 ~ 1/5 수준입니다. <strong>저렴한 곳</strong>을 찾는다면 공공 충전보다는 자가 충전이나 제휴 충전소 활용이 유리합니다.</p>
+
+        <h3>2. 자동차세: 전기차는 세금 혜택이 풍부</h3>
+        <p>2026년에도 전기차는 내연기관 차량보다 낮은 자동차세 혜택을 유지할 것으로 보입니다. 현행법상 전기차는 배기량이 아닌 차량 가격을 기준으로 과세되지만, 친환경차로서 감면 혜택이 적용되어 상대적으로 저렴합니다. <strong>BMW i 시리즈</strong>의 경우, 모델별 <strong>가격</strong>에 따라 연간 자동차세가 약 10만 원 ~ 30만 원 수준으로 <strong>예상</strong>됩니다. 이는 <strong>BMW i7</strong>과 같은 고가 모델에서도 상당한 <strong>비용</strong> 절감 효과를 가져옵니다. <strong>정부에서 제공되는 사이트들</strong>에서 최신 세금 정보를 확인할 수 있습니다.</p>
+
+        <h3>3. 보험료: 합리적인 <strong>견적</strong> 비교가 중요</h3>
+        <p><strong>BMW i 시리즈</strong>의 보험료는 차량 가액, 운전자 연령, 사고 이력, 그리고 보험사의 상품 조건에 따라 달라집니다. 최근에는 전기차 전용 특약이나 할인 혜택을 제공하는 보험사들이 늘어나면서, <strong>BMW i 보험료</strong> 또한 점차 합리화되고 있습니다. <strong>BMW i4 보험료</strong>, <strong>BMW iX 보험료</strong> 등 모델별 <strong>견적</strong>을 여러 보험사에서 <strong>비교</strong>하여 가장 유리한 조건을 찾는 것이 중요합니다. <strong>전문 업체</strong>나 보험 비교 플랫폼을 활용하면 <strong>저렴한 곳</strong>을 쉽게 찾을 수 있습니다. <strong>AI</strong> 기반 보험 비교 서비스도 활용할 만합니다.</p>
+
+        <h3>4. 소모품 교체 비용: 내연기관차 대비 낮은 편</h3>
+        <p>전기차는 엔진 오일, 변속기 오일, 점화 플러그, 배기 시스템 등 내연기관차에 필수적인 부품이 없어 관련 <strong>비용</strong>이 발생하지 않습니다. <strong>BMW i 시리즈</strong>의 주요 소모품은 타이어, 브레이크 패드, 필터류 등이 있으며, 회생 제동 시스템 덕분에 브레이크 패드 수명이 긴 편입니다. 배터리 팩은 보증 기간(일반적으로 8년 또는 16만 km) 내에는 무상 교체가 가능하며, 이후 교체 <strong>비용</strong>은 높은 편이지만, 교체 주기가 매우 길어 잦은 <strong>비용</strong> 발생은 적습니다. <strong>BMW i3 중고</strong> 모델의 경우, 배터리 상태 점검이 중요합니다.</p>
+
+        <h3>5. 기타 점검 및 수리 비용: 전문 서비스센터 활용</h3>
+        <p>BMW i 시리즈는 첨단 전기차 기술이 집약되어 있으므로, 일반 정비소보다는 BMW 공식 서비스센터나 전기차 전문 정비소를 이용하는 것이 안전하고 효과적입니다. <strong>BMW i 유지비</strong> 중 수리 <strong>비용</strong>은 발생 빈도에 따라 달라지지만, 초기 몇 년간은 보증 수리를 통해 <strong>비용</strong> 부담을 줄일 수 있습니다. <strong>내돈내산 후기</strong>들을 살펴보면, 예상치 못한 수리 <strong>비용</strong>보다는 정기 점검 <strong>비용</strong>이 꾸준히 발생하는 편입니다.</p>
+
+        <p>종합적으로 볼 때, <strong>BMW i 시리즈</strong>의 연간 <strong>예상 유지비</strong> (충전비, 자동차세, 보험료, 소모품 교체 등)는 100만 원 ~ 200만 원 수준으로, 이는 동급 내연기관 BMW 차량 대비 약 30~50% 이상 절감될 수 있는 <strong>금액</strong>입니다. <strong>BMW i 견적</strong> 시 이러한 총 <strong>비용</strong>을 고려해야 합니다.</p>
+    </section>
+
+    <section id="leasing-rental">
+        <h2>BMW i 시리즈: 자동차 리스 vs 장기 렌트카 비교 분석</h2>
+        <p><strong>BMW i 시리즈</strong>와 같은 고가의 전기차를 구매하는 대신, <strong>자동차리스</strong> 또는 <strong>장기렌트카</strong>를 이용하는 것은 현명한 선택이 될 수 있습니다. 특히 법인 차량 운용 시 <strong>비용</strong> 효율성과 세무 처리 측면에서 큰 <strong>혜택</strong>을 받을 수 있습니다. 2026년 현재, 두 상품의 <strong>장단점</strong>과 <strong>차이점</strong>을 명확히 이해하는 것이 중요합니다.</p>
+
+        <h3>1. 자동차 리스 (Financial Lease / Operating Lease)</h3>
+        <p><strong>개념:</strong> 차량을 소유하는 대신 일정 기간 동안 사용 권한을 빌리는 금융 상품입니다. 회계상 자산으로 인식되는 금융 리스와 감가상각을 리스사가 부담하는 운용 리스로 나뉩니다.</p>
+        <p><strong>주요 특징 및 <strong>장점</strong>:</strong></p>
+        <ul>
+            <li><strong>자산 인식:</strong> 금융 리스의 경우, 차량이 회사 자산으로 인식되어 재무제표 관리에 용이할 수 있습니다.</li>
+            <li><strong>차량 명의:</strong> 리스 차량은 명의가 '리스 회사'로 되어 있으나, 운용 리스는 번호판 색상이 일반 자가용과 동일하여 '내 차'처럼 이용 가능합니다.</li>
+            <li><strong>맞춤 설계:</strong> 약정 거리, 계약 기간, 선수금 비율 등을 개인/법인 맞춤으로 설정할 수 있습니다.</li>
+            <li><strong>세금 혜택:</strong> 리스료 전액을 회계상 비용 처리하여 법인세 절감 효과를 볼 수 있습니다. (사업자 한정)</li>
+            <li><strong>BMW i 리스:</strong> <strong>BMW i4 리스</strong>, <strong>BMW iX 리스</strong> 등 고가 모델의 초기 구매 부담을 줄이고 월 고정 <strong>비용</strong>으로 운용 가능합니다.</li>
+        </ul>
+        <p><strong>주요 <strong>단점</strong>:</strong></p>
+        <ul>
+            <li><strong>명의:</strong> 금융 리스는 차량이 부채로 인식될 수 있습니다.</li>
+            <li><strong>약정 거리 초과:</strong> 초과 시 위약금이 발생할 수 있습니다.</li>
+            <li><strong>중도 해지:</strong> 중도 해지 시 높은 위약금이 발생할 수 있습니다.</li>
+            <li><strong>차량 튜닝 제한:</strong> 임의적인 튜닝이나 개조가 제한될 수 있습니다.</li>
+        </ul>
+
+        <h3>2. 장기 렌트카 (Long-term Rental Car)</h3>
+        <p><strong>개념:</strong> 렌터카 회사 명의로 차량을 등록하여 일정 기간(보통 12개월 ~ 60개월) 동안 임대하여 사용하는 서비스입니다.</p>
+        <p><strong>주요 특징 및 <strong>장점</strong>:</strong></p>
+        <ul>
+            <li><strong>명의:</strong> 렌터카 회사 명의로 등록되므로, 개인/법인 명의의 보험료나 자동차세 인상과는 무관합니다. (사고 시 보험료 할증 없음)</li>
+            <li><strong>사고 처리:</strong> 사고 발생 시 렌터카 회사에서 대차 및 수리 등 모든 절차를 대행합니다.</li>
+            <li><strong>주행거리 제한:</strong> 약정 거리에 따라 <strong>BMW i 장기렌트</strong> <strong>비용</strong>이 산정됩니다. (연간 1만km ~ 3만km 등 선택 가능)</li>
+            <li><strong>세금 혜택:</strong> 렌트료 전액을 비용 처리하여 법인세 절감 효과를 얻을 수 있습니다. (사업자 한정)</li>
+            <li><strong>BMW i 장기렌트:</strong> <strong>BMW i5 장기렌트</strong>, <strong>BMW i7 장기렌트</strong> 등 다양한 모델을 합리적인 <strong>월 비용</strong>으로 이용할 수 있습니다.</li>
+            <li><strong>현금지원</strong>, <strong>사은품</strong>, <strong>이벤트</strong>:</strong> 렌터카 회사를 통해 다양한 프로모션이나 <strong>혜택</strong>을 받을 수 있습니다.</li>
+        </ul>
+        <p><strong>주요 <strong>단점</strong>:</strong></p>
+        <ul>
+            <li><strong>번호판:</strong> '허', '하', '호' 와 같은 렌터카 전용 번호판이 발급됩니다. (이 인식에 대한 <strong>단점</strong>을 우려하는 분들도 계십니다.)</li>
+            <li><strong>약정 거리 초과:</strong> 초과 시 킬로당 <strong>비용</strong>이 발생합니다.</li>
+            <li><strong>보증금/선수금:</strong> 계약 조건에 따라 보증금 또는 선수금 납입이 필요할 수 있습니다.</li>
+        </ul>
+
+        <h3>리스 vs 장기 렌트카 <strong>차이점</strong> 및 선택 가이드</h3>
+        <p><strong>핵심 <strong>차이점</strong></strong>은 차량 명의와 번호판입니다. <strong>BMW i 리스</strong>는 차량을 자산으로 관리하고 싶거나, 일반 번호판을 선호하는 경우, 또는 감가상각 부담을 직접 관리하고 싶은 경우에 적합합니다. 반면, <strong>BMW i 장기렌트</strong>는 초기 <strong>비용</strong> 부담을 최소화하고, 사고 발생 시 보험료 할증 걱정 없이 차량을 이용하고 싶으며, 번호판에 대한 거부감이 없는 경우에 유리합니다. <strong>전문 업체</strong>와 상담하여 본인의 주행 패턴, 예산, 법규 등을 고려하여 최적의 상품을 선택하는 것이 중요합니다.</p>
+        <p><strong>네이버</strong>, <strong>구글</strong>, <strong>유튜브</strong> 등에서 'BMW i 리스 비교', 'BMW i 장기렌트 <strong>견적</strong>' 등을 검색하여 다양한 정보를 얻을 수 있습니다. <strong>AI</strong> 챗봇을 활용한 비교 분석도 좋은 방법입니다. <strong>저렴한 곳</strong>이나 <strong>싼 곳</strong>을 찾기 위해서는 여러 비교 견적을 받아보는 것이 필수입니다.</p>
+    </section>
+
+    <section id="cost-comparison">
+        <h2>BMW i 시리즈 모델별 예상 <strong>비용</strong> 및 <strong>가격</strong> 비교 (2026년 기준)</h2>
+        <p>BMW i 시리즈의 <strong>가격</strong>과 <strong>유지비</strong>는 모델별 성능, 크기, 트림 등에 따라 상이합니다. 아래 표는 2026년 기준 주요 모델의 예상 <strong>가격</strong> 범위, 연간 <strong>예상 유지비</strong> (자동차세, 보험료, 충전비 등 포함) 및 리스/장기렌트 시 <strong>평균 월 비용</strong>을 비교한 것입니다. 이는 일반적인 <strong>견적</strong>이며, 실제 <strong>비용</strong>은 개인의 조건 및 선택에 따라 달라질 수 있습니다. <strong>전문가</strong>와 상담하여 정확한 <strong>견적</strong>을 받아보세요.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>모델</th>
+                    <th>2026년 예상 <strong>가격</strong> (원)</th>
+                    <th>연간 <strong>예상 유지비</strong> (원)</th>
+                    <th><strong>평균 월 리스/렌트 비용</strong> (원)</th>
+                    <th>주요 <strong>장점</strong></th>
+                    <th>주요 <strong>단점</strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BMW i4 (eDrive35/40)</td>
+                    <td>7,000만 ~ 8,000만</td>
+                    <td>120만 ~ 180만</td>
+                    <td>90만 ~ 130만</td>
+                    <td>스포티한 주행감, 효율적인 <strong>비용</strong></td>
+                    <td>넓은 공간 <strong>제한</strong>, <strong>iX</strong> 대비 낮은 전고</td>
+                </tr>
+                <tr>
+                    <td>BMW iX (xDrive50)</td>
+                    <td>1억 2,000만 ~ 1억 4,000만</td>
+                    <td>150만 ~ 230만</td>
+                    <td>140만 ~ 190만</td>
+                    <td>혁신적 디자인, 넓은 실내, 최첨단 기술</td>
+                    <td>높은 <strong>가격</strong>, <strong>i4</strong> 대비 <strong>유지비</strong> 높음</td>
+                </tr>
+                <tr>
+                    <td>BMW i7 (xDrive60)</td>
+                    <td>1억 5,000만 ~ 1억 8,000만</td>
+                    <td>180만 ~ 280만</td>
+                    <td>180만 ~ 250만</td>
+                    <td>최고급 럭셔리, 편안함, 최첨단 편의사양</td>
+                    <td>매우 높은 <strong>가격</strong>, <strong>운전</strong> 재미보다는 <strong>승차감</strong> 중심</td>
+                </tr>
+                <tr>
+                    <td>BMW i5 (eDrive40/M60)</td>
+                    <td>8,500만 ~ 1억 1,000만</td>
+                    <td>130만 ~ 200만</td>
+                    <td>110만 ~ 160만</td>
+                    <td>균형 잡힌 성능, 비즈니스 <strong>세단</strong></td>
+                    <td><strong>i4</strong>와 <strong>i7</strong> 사이의 포지션, <strong>가격</strong>대 높음</td>
+                </tr>
+                <tr>
+                    <td>BMW i3 (중고)</td>
+                    <td>2,000만 ~ 3,500만 (중고)</td>
+                    <td>80만 ~ 130만 (중고)</td>
+                    <td><strong>구매</strong> 또는 <strong>개인</strong> <strong>장기렌트</strong> (신규 <strong>상품</strong> 적음)</td>
+                    <td>저렴한 <strong>유지비</strong>, 도심형 디자인</td>
+                    <td>단종, <strong>주행거리</strong> 및 배터리 상태 확인 필수</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><small><em>* 위 <strong>가격</strong> 및 <strong>비용</strong>은 2026년 5월 기준 <strong>예상</strong>치이며, 옵션, 트림, 프로모션, 지역별 세금 등에 따라 변동될 수 있습니다. 정확한 <strong>견적</strong>은 <strong>전문 업체</strong>에 문의하시기 바랍니다.</em></small></p>
+
+        <div class="chart-container">
+            <p class="chart-title">BMW i 시리즈 모델별 연간 <strong>예상 유지비</strong> 비교 (2026년)</p>
+            <canvas id="maintenanceCostChart" width="800" height="400" aria-label="BMW i 시리즈 모델별 연간 예상 유지비 비교 그래프" role="img"></canvas>
+        </div>
+        <p><strong>BMW i 시리즈</strong>의 연간 <strong>유지비</strong>는 모델별로 차이를 보이지만, 전반적으로 내연기관 차량 대비 매우 경제적입니다. <strong>iX</strong>나 <strong>i7</strong>과 같은 고급 모델은 <strong>가격</strong>과 <strong>유지비</strong>가 상대적으로 높지만, <strong>i4</strong>나 <strong>i5</strong>, 그리고 <strong>i3 중고</strong> 모델은 <strong>비용</strong> 부담이 훨씬 적습니다. <strong>AI</strong> 분석에 따르면, 전기차의 총 소유 <strong>비용</strong>(TCO)은 장기적으로 매우 유리합니다.</p>
+    </section>
+
+    <section id="saving-tips">
+        <h2>BMW i 시리즈 <strong>비용</strong> 절감 전략: <strong>할인</strong>, <strong>혜택</strong>, <strong>현금지원</strong> 활용법</h2>
+        <p><strong>BMW i 시리즈</strong>를 더욱 합리적으로 이용하기 위한 다양한 <strong>비용</strong> 절감 전략을 소개합니다. 2026년 기준, 정부 정책과 보험사 프로모션을 적극 활용하면 상당한 <strong>금액</strong>을 절약할 수 있습니다.</p>
+
+        <h3>1. 정부 및 지자체 전기차 <strong>보조금</strong> 및 <strong>세금 감면</strong> 활용</h3>
+        <p>순수 전기차 구매 시 정부 및 각 지자체에서 제공하는 <strong>보조금</strong>을 받을 수 있습니다. 2026년에도 이러한 지원은 계속될 예정이며, 모델별 <strong>가격</strong> 및 성능에 따라 <strong>보조금</strong> 액수가 달라집니다. (<strong>BMW i4</strong>, <strong>BMW iX</strong> 등 모델별 상이) 또한, 취득세, 개별소비세, <strong>자동차세</strong> 등 각종 세금 감면 혜택을 통해 총 <strong>비용</strong> 부담을 줄일 수 있습니다. <strong>정부 사이트</strong>에서 최신 <strong>보조금</strong> 정보를 확인하는 것이 필수입니다. <strong>지원금</strong>은 한정적이므로 신속하게 신청해야 합니다.</p>
+
+        <h3>2. <strong>자동차리스</strong> 및 <strong>장기렌트카</strong> 프로모션 <strong>비교</strong></h3>
+        <p>앞서 설명드린 <strong>BMW i 리스</strong> 및 <strong>BMW i 장기렌트</strong> 상품은 시기별로 다양한 <strong>할인</strong>, <strong>현금지원</strong>, <strong>사은품</strong>, <strong>상품권</strong> 제공 등의 <strong>이벤트</strong>를 진행합니다. <strong>네이버</strong>, <strong>구글</strong>, <strong>인스타그램</strong> 등에서 'BMW i <strong>리스</strong> <strong>할인</strong>', 'BMW i <strong>장기렌트</strong> <strong>혜택</strong>' 등을 검색하여 최신 프로모션을 확인하고, 여러 <strong>업체</strong>의 <strong>견적</strong>을 <strong>비교</strong>하는 것이 <strong>저렴한 곳</strong>을 찾는 핵심입니다. <strong>신규</strong> 계약자를 위한 특별 <strong>혜택</strong>도 놓치지 마세요.</p>
+
+        <h3>3. 보험 <strong>비교</strong> 견적 및 특약 활용</h3>
+        <p><strong>BMW i 시리즈</strong> 보험료 <strong>견적</strong> 시, 여러 보험사의 <strong>상품</strong>을 <strong>비교</strong>하는 것은 필수입니다. 전기차 전용 특약 (예: 배터리 보상, 충전기 손해 보상)이나 무사고 할인, 자녀 할인 등을 적극 활용하면 보험료를 크게 절감할 수 있습니다. <strong>AI</strong> 기반 보험 비교 서비스는 이러한 <strong>비교</strong> 과정을 간소화해줍니다. <strong>전문</strong> 상담사와 상의하여 본인에게 가장 유리한 <strong>상품</strong>을 선택하세요. <strong>싼 곳</strong>이라고 해서 보장 범위가 좁은 <strong>상품</strong>을 선택하는 것은 <strong>단점</strong>이 될 수 있습니다.</p>
+
+        <h3>4. 중장기적 <strong>비용</strong> 관리: <strong>주행거리</strong> 및 <strong>관리</strong> 습관</h3>
+        <p><strong>장기렌트</strong> 또는 리스 계약 시, 본인의 연간 <strong>주행거리</strong>를 정확히 산정하여 약정 거리를 설정하는 것이 중요합니다. <strong>주행거리</strong> 초과 시 <strong>비용</strong>이 발생할 수 있으므로, 실제 운행 패턴을 고려해야 합니다. 또한, 전기차의 효율적인 <strong>관리</strong> 습관 (급가속/급제동 자제, 회생 제동 적극 활용, 적정 공기압 유지)은 배터리 수명 연장과 <strong>에너지 효율</strong> 증대에 기여하여 장기적으로 <strong>유지비</strong> 절감으로 이어집니다. <strong>내돈내산 후기</strong>에서도 이러한 습관의 중요성이 강조됩니다.</p>
+
+        <h3>5. <strong>YouTube</strong>, <strong>인스타그램</strong> <strong>후기</strong> 및 <strong>커뮤니티</strong> 활용</h3>
+        <p>다양한 <strong>YouTube</strong> 채널, <strong>인스타그램</strong> 계정, 온라인 <strong>커뮤니티</strong>에서는 <strong>BMW i 시리즈</strong>의 <strong>유지비</strong>, <strong>리스</strong>/<strong>장기렌트</strong> <strong>후기</strong>, <strong>할인</strong> 정보 등이 활발하게 공유됩니다. <strong>내돈내산 후기</strong>나 <strong>디시</strong>(DC) 같은 플랫폼의 정보는 실제 사용자들의 생생한 경험을 바탕으로 하므로 <strong>비용</strong> 절감 전략 수립에 큰 도움이 됩니다. <strong>제미나이</strong>, <strong>챗지피티</strong> 등 <strong>AI</strong> 툴을 활용하여 관련 정보를 요약하고 분석하는 것도 효율적인 방법입니다.</p>
+        <p><strong>BMW i 추천</strong> 모델을 찾거나, <strong>가입</strong> <strong>혜택</strong>을 최대한 활용하고 싶다면, 최신 <strong>이벤트</strong> 정보를 꾸준히 확인하고 여러 <strong>업체</strong>와 <strong>비교</strong>하는 노력이 중요합니다. <strong>신규</strong> <strong>상품</strong> 출시나 시즌별 <strong>할인</strong> 기회를 잘 포착하면 합리적인 <strong>가격</strong>으로 <strong>BMW i 시리즈</strong>를 경험할 수 있습니다.</p>
+    </section>
+
+    <section id="faq" class="faq">
+        <h2>BMW i 시리즈 <strong>FAQ</strong>: 자주 묻는 질문과 답변</h2>
+        <div class="item">
+            <h3>Q1: BMW i 시리즈의 연간 <strong>유지비</strong>는 <strong>얼마</strong> 정도인가요?</h3>
+            <p>A: <strong>BMW i 시리즈</strong>의 연간 <strong>예상 유지비</strong>는 모델, <strong>주행거리</strong>, 보험 조건 등에 따라 다르지만, 일반적으로 100만 원 ~ 280만 원 선입니다. 이는 충전비, 자동차세, 보험료, 소모품 교체 <strong>비용</strong>을 포함한 <strong>금액</strong>으로, 동급 내연기관 차량 대비 30~50% 이상 절감됩니다. <strong>BMW i4</strong>나 <strong>i3 중고</strong> 모델은 특히 더 경제적입니다.</p>
+        </div>
+        <div class="item">
+            <h3>Q2: BMW i 시리즈 <strong>리스</strong>와 <strong>장기렌트</strong> 중 어떤 것이 더 유리한가요?</h3>
+            <p>A: <strong>리스</strong>는 차량을 자산으로 관리하고 싶거나 일반 번호판을 선호하는 경우, <strong>장기렌트</strong>는 초기 <strong>비용</strong> 부담 최소화, 사고 시 보험료 할증 없음, 렌터카 번호판에 거부감이 없는 경우에 유리합니다. 법인 <strong>사업자</strong>라면 두 상품 모두 <strong>비용</strong> 처리 <strong>혜택</strong>을 받을 수 있습니다. <strong>AI</strong> 챗봇이나 <strong>전문 업체</strong>와 상담하여 본인의 상황에 맞는 선택을 하는 것이 좋습니다.</p>
+        </div>
+        <div class="item">
+            <h3>Q3: BMW i 시리즈 전기차의 배터리 <strong>수명</strong> 및 교체 <strong>비용</strong>은 어떻게 되나요?</h3>
+            <p>A: BMW i 시리즈의 배터리는 일반적으로 8년 또는 16만 km까지 <strong>보증</strong>됩니다. 배터리 <strong>수명</strong>은 사용 습관, 충전 방식 등에 따라 다르지만, 대부분의 <strong>운전자</strong>는 <strong>보증</strong> 기간 내에 배터리 교체를 경험하지 않습니다. <strong>보증</strong> 기간 이후 교체 <strong>비용</strong>은 높지만, <strong>차량 가격</strong> 대비 <strong>교체 주기</strong>가 매우 길어 장기적인 <strong>유지비</strong>에 큰 영향을 주지 않습니다. <strong>BMW iX</strong> 등 고가 모델은 배터리 용량이 커 <strong>교체 비용</strong> 또한 높을 수 있습니다.</p>
+        </div>
+        <div class="item">
+            <h3>Q4: <strong>BMW i4</strong>, <strong>BMW iX</strong>, <strong>BMW i7</strong> 중 <strong>유지비</strong>가 가장 적게 드는 모델은 무엇인가요?</h3>
+            <p>A: 일반적으로 <strong>BMW i4</strong> 모델이 <strong>BMW iX</strong>나 <strong>BMW i7</strong>에 비해 <strong>가격</strong> 및 <strong>유지비</strong>가 낮은 편입니다. <strong>i4</strong>는 더 작은 배터리 용량과 차량 크기로 인해 충전 <strong>비용</strong> 및 보험료가 상대적으로 적게 듭니다. <strong>BMW i3 중고</strong> 모델 역시 <strong>유지비</strong>가 매우 경제적인 선택지입니다.</p>
+        </div>
+        <div class="item">
+            <h3>Q5: 전기차 <strong>충전</strong>은 어떻게 하고 <strong>비용</strong>은 어떻게 계산되나요?</h3>
+            <p>A: 전기차 <strong>충전</strong>은 가정용 충전기, 공공 충전소 (급속/완속), 또는 제휴된 충전소를 이용합니다. <strong>비용</strong>은 주로 사용한 전력량 (kWh)과 충전 사업자의 요금 체계에 따라 결정됩니다. 한국전력공사, 한국전기차협회 등의 웹사이트에서 <strong>충전</strong> 요금 정보와 <strong>보조금</strong> 관련 정보를 얻을 수 있습니다. <strong>평균</strong>적으로 공공 급속 충전보다 가정용 완속 <strong>충전</strong>이 훨씬 <strong>저렴한 곳</strong>입니다.</p>
+        </div>
+    </section>
+
+    <section id="quote">
+        <h2>BMW i 시리즈 맞춤 <strong>견적</strong> 문의</h2>
+        <p>2026년 최신 <strong>BMW i 시리즈</strong> 모델의 <strong>자동차리스</strong>, <strong>장기렌트카</strong> <strong>견적</strong> 및 <strong>유지비</strong> 관련 상담을 원하시면 아래 양식을 작성해주세요. <strong>AI</strong> 기반으로 분석된 최적의 <strong>상품</strong>을 추천해 드립니다. <strong>전문 업체</strong>가 신속하고 정확하게 <strong>비용</strong> <strong>상담</strong>을 도와드립니다.</p>
+        <form action="/submit-bmwi-quote" method="post" aria-label="BMW i 시리즈 리스/장기렌트 견적 문의 폼">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="companyName">회사명 (법인 <strong>사업자</strong>)</label>
+                    <input type="text" id="companyName" name="companyName" placeholder="없으시면 '개인' 입력" />
+                </div>
+                <div class="input-group">
+                    <label for="contactName">담당자명 / 성함</label>
+                    <input type="text" id="contactName" name="contactName" required />
+                </div>
+                <div class="input-group">
+                    <label for="phoneNumber">연락처</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" placeholder="예: 010-1234-5678" required />
+                </div>
+                <div class="input-group">
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required />
+                </div>
+                <div class="input-group">
+                    <label for="bmwiModel">희망 모델</label>
+                    <select id="bmwiModel" name="bmwiModel" required>
+                        <option value="" disabled selected>모델 선택</option>
+                        <option value="i4">BMW i4</option>
+                        <option value="iX">BMW iX</option>
+                        <option value="i7">BMW i7</option>
+                        <option value="i5">BMW i5</option>
+                        <option value="i3-used">BMW i3 (중고)</option>
+                        <option value="other">기타 (직접 입력)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="usagePurpose">차량 사용 목적</label>
+                    <select id="usagePurpose" name="usagePurpose" required>
+                        <option value="" disabled selected>목적 선택</option>
+                        <option value="personal">개인 용도</option>
+                        <option value="business-commute">업무용 (출퇴근)</option>
+                        <option value="business-sales">업무용 (영업/방문)</option>
+                        <option value="executive">의전용</option>
+                        <option value="rental">렌터카/택시 사업용</option>
+                        <option value="other">기타</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="annualMileage">연간 예상 <strong>주행거리</strong> (km)</label>
+                    <input type="number" id="annualMileage" name="annualMileage" placeholder="예: 20000" min="5000" max="50000" required />
+                </div>
+                <div class="input-group">
+                    <label for="contractTerm">희망 계약 기간 (개월)</label>
+                    <select id="contractTerm" name="contractTerm" required>
+                        <option value="" disabled selected>기간 선택</option>
+                        <option value="24">24개월</option>
+                        <option value="36">36개월</option>
+                        <option value="48">48개월</option>
+                        <option value="60">60개월</option>
+                        <option value="72">72개월</option>
+                    </select>
+                </div>
+                <div class="input-group full-width">
+                    <label for="additionalInfo">추가 문의 사항 (<strong>견적</strong>, <strong>혜택</strong>, <strong>할인</strong> 등)</label>
+                    <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="알고 싶은 BMW i 모델의 특정 가격, 비용, 장점, 단점, 할인 혜택, 현금지원, 사은품, 이벤트, 상품권, 전문 업체 추천, 내돈내산 후기 등 자유롭게 기재해주세요."></textarea>
+                </div>
+            </div>
+            <button type="submit" class="cta-btn">맞춤 <strong>견적</strong> 요청하기</button>
+        </form>
+    </section>
+
+    <section id="external-resources">
+        <h2>신뢰할 수 있는 <strong>BMW i</strong> <strong>정보</strong> 외부 참고자료</h2>
+        <p>BMW i 시리즈 및 전기차 관련 최신 정보와 심층 분석을 위해 공신력 있는 외부 자료들을 참고하시는 것을 추천합니다.</p>
+        <ul>
+            <li><a href="https://www.bmw.co.kr/ko/all-models/electric-vehicles.html" target="_blank" rel="noopener" class="external-link">BMW 코리아 공식 웹사이트 - 순수 전기차 라인업</a></li>
+            <li><a href="https://namu.wiki/w/BMW%20i%20%EC%8B%9C%EB%A6%AC%EC%A6%88" target="_blank" rel="noopener" class="external-link">나무위키: BMW i 시리즈</a> (다양한 모델 정보 및 <strong>후기</strong>)</li>
+            <li><a href="https://www.kca.go.kr/be/web/mbia/downloadPrdLst.do?bd_num=100567&bd_seq=20048" target="_blank" rel="noopener" class="external-link">한국소비자원 - 전기차 <strong>유지비</strong> 및 <strong>가격</strong> 비교 정보</a> (정부 제공 <strong>정보</strong>)</li>
+            <li><a href="https://www.ev.or.kr/portal/main/main.do" target="_blank" rel="noopener" class="external-link">무공해차 통합 정보 <strong>포털</strong> (ev.or.kr)</a> (<strong>보조금</strong>, <strong>충전</strong> 인프라 정보)</li>
+            <li><a href="https://www.kidi.re.kr/business/content.do?menuId=3000" target="_blank" rel="noopener" class="external-link">한국산업기술진흥원 - 전기차 산업 동향</a> (산업 <strong>정보</strong>)</li>
+            <li><a href="https://www.kotsa.or.kr/main.do" target="_blank" rel="noopener" class="external-link">한국교통안전공단</a> (자동차 안전 및 <strong>법규</strong> 관련 <strong>정보</strong>)</li>
+        </ul>
+    </section>
+  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqItems = document.querySelectorAll('.faq .item h3');
+            faqItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const parentItem = item.parentElement;
+                    parentItem.classList.toggle('active');
+                    const p = item.nextElementSibling;
+                    if (p && p.tagName === 'P') {
+                        p.style.display = parentItem.classList.contains('active') ? 'block' : 'none';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.faq .item.active > p').forEach(p => {
+                p.style.display = 'block';
+            });
+
+            const maintenanceCtx = document.getElementById('maintenanceCostChart').getContext('2d');
+            const maintenanceChart = new Chart(maintenanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['BMW i4', 'BMW iX', 'BMW i7', 'BMW i5', 'BMW i3 (중고)'],
+                    datasets: [{
+                        label: '연간 예상 유지비 (만원)',
+                        data: [150, 200, 240, 170, 100],
+                        backgroundColor: [
+                            'rgba(0, 112, 210, 0.7)',
+                            'rgba(40, 167, 69, 0.7)',
+                            'rgba(253, 126, 20, 0.7)',
+                            'rgba(111, 66, 193, 0.7)',
+                            'rgba(108, 117, 125, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 112, 210, 1)',
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(253, 126, 20, 1)',
+                            'rgba(111, 66, 193, 1)',
+                            'rgba(108, 117, 125, 1)'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 50,
+                                callback: value => `${value}만`
+                            },
+                            title: {
+                                display: true,
+                                text: '만원'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'BMW i 시리즈 모델'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: context => `${context.parsed.y}만원`
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            bottom: 10,
+                            left: 10,
+                            right: 10
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+  
